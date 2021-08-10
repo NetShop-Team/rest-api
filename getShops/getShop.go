@@ -8,9 +8,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func GetUser(w http.ResponseWriter, r *http.Request) {
+func GetShop(w http.ResponseWriter, r *http.Request) {
 
-	db, err = sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/backend")
+	db, err = sql.Open("mysql", "RightyDev:NetShop2021@tcp(127.0.0.1:3306)/backend")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -25,7 +25,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	defer result.Close()  
 	var shop Shop  
 	for result.Next() {
-	  err := result.Scan(&shop.Id, shop.Name, &shop.Login, &shop.Password)
+	  err := result.Scan(&shop.Id, &shop.Name, &shop.Login, &shop.Password)
 	  if err != nil {
 		panic(err.Error())
 	  }

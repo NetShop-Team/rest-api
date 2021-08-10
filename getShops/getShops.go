@@ -16,8 +16,8 @@ type Shop struct {
 var db *sql.DB
 var err error
 
-func GetUsers(w http.ResponseWriter, r *http.Request) {
-	db, err = sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/backend")
+func GetShops(w http.ResponseWriter, r *http.Request) {
+	db, err = sql.Open("mysql", "RightyDev:NetShop2021@tcp(127.0.0.1:3306)/backend")
 	if err != nil {
 		panic(err.Error())
 	}
