@@ -1,11 +1,10 @@
 package getUsers
 
- import (
-// 	"database/sql"
-// 	"encoding/json"
+import (
+	"database/sql"
+	"encoding/json"
 	"net/http"
 	_ "github.com/go-sql-driver/mysql"
-	"fmt"
 )
 
 type User struct {
@@ -39,5 +38,4 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		users = append(users, user)
 	}
 	json.NewEncoder(w).Encode(users)
-	fmt.Fprintf(w, "qwertty")
 }

@@ -8,6 +8,14 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+type User struct {
+	Id   int
+	Login string
+	Password string
+}
+var db *sql.DB
+var err error
+
 func GetUser(w http.ResponseWriter, r *http.Request) {
 
 	db, err = sql.Open("mysql", "RightyDev:NetShop2021@tcp(localhost:3306)/backend")
