@@ -10,7 +10,7 @@ import (
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
 
-	db, err = sql.Open("mysql", "RightyDev:NetShop2021@tcp(127.0.0.1:3306)/backend")
+	db, err = sql.Open("mysql", "RightyDev:NetShop2021@tcp(localhost:3306)/backend")
 	if err != nil {
 		panic(err.Error())
 	}
