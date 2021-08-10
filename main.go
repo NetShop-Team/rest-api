@@ -1,18 +1,20 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/NetShop-Team/rest-api/getUsers"
-	"github.com/NetShop-Team/rest-api/getShops"
-	"net/http"
+    "os"
+    "fmt"
+    "net/http"
 )
 
-func main(){
-	r := mux.NewRouter() 
-	r.HandleFunc("/users", getUsers.GetUsers).Methods("GET")
-	r.HandleFunc("/users/{id}", getUsers.GetUser).Methods("GET")
+func main() {
+    http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "Welcome to the Internet! Please follow me.\n")
+    })
 
-	r.HandleFunc("/shops", getShops.GetShops).Methods("GET")
-	r.HandleFunc("/shops/{id}", getShops.GetShop).Methods("GET")
-	http.ListenAndServe(":8000", r)
+    // создадим переменные APP_IP и APP_PORT, а их значения возьмем из одноименных переменных окружения
+    APP_IP := os.Getenv("APP_IP")
+    APP_PORT := os.Getenv("APP_PORT")
+
+    fmt.Println(APP_IP+":"+APP_PORT)
+    http.ListenAndServe(APP_IP+":"+APP_PORT, nil)
 }
