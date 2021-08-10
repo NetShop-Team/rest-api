@@ -5,6 +5,8 @@ import (
 	"github.com/NetShop-Team/rest-api/getUsers"
 	"github.com/NetShop-Team/rest-api/getShops"
 	"net/http"
+	"os"
+	"fmt"
 )
 
 func main(){
@@ -14,5 +16,10 @@ func main(){
 
 	r.HandleFunc("/shops", getShops.GetShops).Methods("GET")
 	r.HandleFunc("/shops/{id}", getShops.GetShop).Methods("GET")
-	http.ListenAndServe(":8000", r)
+	
+	APP_IP := os.Getenv("APP_IP")
+    APP_PORT := os.Getenv("APP_PORT")
+
+    fmt.Println(APP_IP+":"+APP_PORT)
+    http.ListenAndServe(APP_IP+":"+APP_PORT, nil)
 }
