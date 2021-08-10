@@ -8,13 +8,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type User struct {
-	Id   int
-	Login string
-	Password string
-}
-var db *sql.DB
-var err error
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
 
