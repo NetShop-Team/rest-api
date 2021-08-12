@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
+	"github.com/gorilla/mux"
 	_ "github.com/go-sql-driver/mysql"
 )
-
 
 func GetProduct (w http.ResponseWriter, r *http.Request){
 
