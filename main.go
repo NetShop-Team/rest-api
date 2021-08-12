@@ -1,20 +1,30 @@
 package main
 
 import (
-    "os"
-    "fmt"
     "net/http"
+    "database/sql"
+    "github.com/gorilla/mux"
+	_ "github.com/go-sql-driver/mysql"
 )
+var db *sql.DB
+var err error
 
+type Product struct{
+    Id int
+    CategoryId int
+    Name string
+    Description string
+    Likes int
+    ShopId int
+}
+
+    
 func main() {
-    http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Welcome to the Internet! Please follow me.\n")
-    })
 
-    // создадим переменные APP_IP и APP_PORT, а их значения возьмем из одноименных переменных окружения
-    APP_IP := os.Getenv("APP_IP")
-    APP_PORT := os.Getenv("APP_PORT")
+    r := mux.NewRouter()
 
-    fmt.Println(APP_IP+":"+APP_PORT)
-    http.ListenAndServe(APP_IP+":"+APP_PORT, nil)
+    r.HandleFunc("/products", GetProducts).Methods("GET")
+    r.HandleFunc("/products/{id}", GetProduct).Methods("GET")
+    http.Handle("/", r)
+    http.ListenAndServe("localhost:8000", nil)
 }
