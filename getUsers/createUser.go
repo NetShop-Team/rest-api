@@ -18,7 +18,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	stmt, err := db.Prepare("INSERT INTO users(name, age) VALUES(?)")
+	stmt, err := db.Prepare("INSERT INTO users(name) VALUES(?)")
 	if err != nil {
 	  panic(err.Error())
 	}  
@@ -29,8 +29,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	keyVal := make(map[string]string)
 	json.Unmarshal(body, &keyVal)
 	name := keyVal["name"]  
-	age := keyVal["age"]  
-	_, err = stmt.Exec(name, age)
+	_, err = stmt.Exec(name)
 	if err != nil {
 	  panic(err.Error())
 	}  

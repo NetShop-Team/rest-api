@@ -33,6 +33,7 @@ func main() {
     r.HandleFunc("/shops/{id}", getShops.GetShop).Methods("GET")
 	
 	r.HandleFunc("/users", getUsers.GetUsers).Methods("GET")
+	r.HandleFunc("/users", getUsers.CreateUser).Methods("POST")
     r.HandleFunc("/users/{id}", getUsers.GetUser).Methods("GET")
     http.Handle("/", r)
     http.ListenAndServe("localhost:8000", nil)
