@@ -18,7 +18,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	stmt, err := db.Prepare("INSERT INTO users(name) VALUES(?)")
+	stmt, err := db.Prepare("INSERT INTO users(login) VALUES(?)")
 	if err != nil {
 	  panic(err.Error())
 	}  
