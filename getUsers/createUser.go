@@ -19,19 +19,19 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	stmt, err := db.Prepare("INSERT INTO users(login) VALUES(?)")
-	if err != nil {
-	  panic(err.Error())
-	}  
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-	  panic(err.Error())
-	}  
-	keyVal := make(map[string]string)
-	json.Unmarshal(body, &keyVal)
-	name := keyVal["name"]  
-	_, err = stmt.Exec(name)
-	if err != nil {
-	  panic(err.Error())
-	}  
-	fmt.Fprintf(w, "New post was created")
+  if err != nil {
+    panic(err.Error())
+  }  
+   body, err := ioutil.ReadAll(r.Body)
+  if err != nil {
+    panic(err.Error())
+  }  
+  keyVal := make(map[string]string)
+  json.Unmarshal(body, &keyVal)
+  login := keyVal["login"]  
+  _, err = stmt.Exec(login)
+  if err != nil {
+    panic(err.Error())
+  }  
+  fmt.Fprintf(w, "New post was created")
   }
