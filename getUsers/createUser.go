@@ -18,7 +18,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	stmt, err := db.Prepare("INSERT INTO users(login) VALUES(?)")
+	stmt, err := db.Prepare("INSERT INTO users(username, password) VALUES(?, ?)")
   if err != nil {
     panic(err.Error())
   }  
@@ -28,8 +28,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
   }  
   keyVal := make(map[string]string)
   json.Unmarshal(body, &keyVal)
-  login := keyVal["login"]  
-  _, err = stmt.Exec(login)
+  username := keyVal["username"]
+  password := keyVal["password"]
+  _, err = stmt.Exec(username, password)
   if err != nil {
     panic(err.Error())
   }  

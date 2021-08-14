@@ -19,14 +19,14 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)  //{id}
-	result, err := db.Query("SELECT id, login, password FROM users WHERE id = ?", params["id"])
+	result, err := db.Query("SELECT id, username, password FROM users WHERE id = ?", params["id"])
 	if err != nil {
 	  panic(err.Error())
 	}  
 	defer result.Close()  
 	var user User  
 	for result.Next() {
-	  err := result.Scan(&user.Id, &user.Login, &user.Password)
+	  err := result.Scan(&user.Id, &user.UserName, &user.Password)
 	  if err != nil {
 		panic(err.Error())
 	  }

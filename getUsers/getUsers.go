@@ -9,7 +9,7 @@ import (
 
 type User struct {
 	Id   int
-	Login string
+	UserName string
 	Password string
 }
 var db *sql.DB
@@ -23,7 +23,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 	w.Header().Set("Content-Type", "application/json")
 	var users []User
-	result, err := db.Query("SELECT id, login, password from users")
+	result, err := db.Query("SELECT id, username, password from users")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -31,7 +31,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 
 	for result.Next() {
 		var user User
-		er := result.Scan(&user.Id, &user.Login, &user.Password)
+		er := result.Scan(&user.Id, &user.UserName, &user.Password)
 		if er != nil {
 			panic(er.Error())
 		}
