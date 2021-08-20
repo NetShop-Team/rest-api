@@ -42,5 +42,5 @@ func main() {
 	// r.HandleFunc("/users/auth/{username}/{password}", getUsers.AuthUser).Methods("GET")
 
 	 r.HandleFunc("/", setDefaultHeaders)
- 	http.ListenAndServe(":8000", r)
+ 	http.ListenAndServe("185.234.114.233:8000", r)
 }
